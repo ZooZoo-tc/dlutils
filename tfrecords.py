@@ -58,7 +58,46 @@ class TFRecord:
         x, y = example["image"], example['label']
         x = tf.reshape(x, [h, w, c])
         return x, y
+  def _parse_function(proto):
+    # define your tfrecord again. Remember that you saved your image as a string.
+    # keys_to_features = {'image_raw': tf.FixedLenFeature([], tf.string),
+    #                     "label": tf.FixedLenFeature([], tf.int64)}
+    h=32
+    w=32
+    c=3
+    dtype=tf.float32
+    features = {'image': tf.FixedLenFeature([h * w * c], dtype),
+                 'label': tf.FixedLenFeature([], tf.int64)}
+    # example = tf.parse_single_example(proto, features=features)
+    example = tf.io.parse_single_example(proto, features=features)
+    # parsed_image = tf.io.decode_raw(example["image_raw"], tf.uint8)
+    # parsed_image = tf.cast(parsed_image, tf.float32)
 
+# parsed = tf.io.parse_single_example(record, keys_to_features)
+#     parsed_image = tf.io.decode_raw(parsed["image"], tf.uint8)
+#     parsed_image = tf.cast(parsed_image, tf.float32)
+#     parsed_image=  tf.reshape(parsed_image, [ parsed["height"], parsed["width"], parsed["depth"]])    
+#     label = tf.cast(parsed["label"], tf.int32)
+
+
+    # image = tf.decode_raw(example['image_raw'], tf.float32)
+    # image = tf.cast(image, tf.float32)
+
+    # image = tf.image.decode_jpeg(example['image_raw'], channels=3)
+    # image = tf.cast(example, tf.float32)
+    x, y = example["image"], example['label']
+    x = tf.reshape(x, [h, w, c])
+    print(type(x),'----',x,'---------',y)
+
+    # # Load one example
+    # parsed_features = tf.parse_single_example(proto, keys_to_features)
+    
+    # # Turn your saved image string into an array
+    # parsed_features['image_raw'] = tf.decode_raw(
+    #     parsed_features['image_raw'], tf.uint8)
+    
+    # return parsed_features['image_raw'], parsed_features["label"]
+    return x, y
   def load_cifar10(self):
       cifar10_tfrecord_path = self.base_path+'cifar10/'
       mkdirs(cifar10_tfrecord_path)
