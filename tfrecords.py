@@ -50,7 +50,7 @@ class TFRecord:
             example=tf.train.Example(features=tf.train.Features(feature=feature))
             writer.write(example.SerializeToString())
 
-  def parse_tfrecord(self,tfrecord,h=32,w=32,c=3):
+  def parse_tfrecord(tfrecord,h=32,w=32,c=3):
         dtype=tf.float32
         features = {'image': tf.FixedLenFeature([h * w * c], dtype),
                     'label': tf.FixedLenFeature([], tf.int64)}
@@ -58,7 +58,7 @@ class TFRecord:
         x, y = example["image"], example['label']
         x = tf.reshape(x, [h, w, c])
         return x, y
-  def _parse_function(proto):
+  def _parse_function(self,proto):
     # define your tfrecord again. Remember that you saved your image as a string.
     # keys_to_features = {'image_raw': tf.FixedLenFeature([], tf.string),
     #                     "label": tf.FixedLenFeature([], tf.int64)}
