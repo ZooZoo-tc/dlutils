@@ -41,7 +41,7 @@ class TFRecord:
     return tf.train.Feature(int64_list=tf.train.Int64List(value=[value]))
    
   def convert_to_tfrecords(self,images, labels,fileName):
-      with tf.python_io.TFRecordWriter(fileName) as writer:
+      with tf.io.TFRecordWriter(fileName) as writer:
         if isinstance(images[0], numpy.ndarray):
           n = images.shape[0]
           reshape = images.reshape(n, -1)
@@ -75,5 +75,5 @@ class TFRecord:
           os.remove('test.tfrecords')
       return (train_tf_record_filepath,test_tf_record_filepath)
 
-(train_tf_record_filepath,test_tf_record_filepath) = TFRecord().load_cifar10()
-print(train_tf_record_filepath,'---',test_tf_record_filepath)
+# (train_tf_record_filepath,test_tf_record_filepath) = TFRecord().load_cifar10()
+# print(train_tf_record_filepath,'---',test_tf_record_filepath)
