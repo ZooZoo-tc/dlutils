@@ -21,7 +21,7 @@ class TFRecord:
   base_path = '/content/drive/My Drive/models/tfrecords/'
   
   def __init__(self,base_path=base_path,is_mount_required=True):
-    tf.enable_eager_execution()
+    # tf.enable_eager_execution()
     self.base_path = base_path
     self.is_mount_required = is_mount_required
     self.datasets = datasets()
