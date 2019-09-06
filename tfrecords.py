@@ -58,7 +58,7 @@ class TFRecord:
         x, y = example["image"], example['label']
         x = tf.reshape(x, [h, w, c])
         return x, y
-  def _parse_function(self,proto):
+  def parse_function(self,proto):
     # define your tfrecord again. Remember that you saved your image as a string.
     # keys_to_features = {'image_raw': tf.FixedLenFeature([], tf.string),
     #                     "label": tf.FixedLenFeature([], tf.int64)}
