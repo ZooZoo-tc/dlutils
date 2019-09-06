@@ -10,24 +10,12 @@ Original file is located at
 import tensorflow as tf
 import numpy
 import requests
-import os.path
-from os import path
 from shutil import copyfile
-from google.colab import drive
+from .utils import *
 
 class datasets():
     def load_cifar(self):
       return tf.keras.datasets.cifar10.load_data()
-
-#TODO : yet to move following methods to utils
-def is_file_exists(file_path):
-      return path.exists(file_path)
-
-def mkdirs(filepath):
-      if not os.path.exists(filepath):
-              os.makedirs(filepath)
-def mount():
-    drive.mount('/content/drive')
 
 class TFRecord:
   base_path = '/content/drive/My Drive/models/tfrecords/'
