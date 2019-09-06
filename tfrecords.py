@@ -50,11 +50,11 @@ class TFRecord:
             example=tf.train.Example(features=tf.train.Features(feature=feature))
             writer.write(example.SerializeToString())
 
-  def parse_tfrecord(proto,h=32,w=32,c=3):
+  def parse_tfrecord(tfrecord,h=32,w=32,c=3):
         dtype=tf.float32
         features = {'image': tf.FixedLenFeature([h * w * c], dtype),
                     'label': tf.FixedLenFeature([], tf.int64)}
-        example = tf.io.parse_single_example(proto, features=features)
+        example = tf.io.parse_single_example(tfrecord, features=features)
         x, y = example["image"], example['label']
         x = tf.reshape(x, [h, w, c])
         return x, y
