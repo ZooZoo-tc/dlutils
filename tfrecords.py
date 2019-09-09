@@ -84,7 +84,7 @@ class TFRecord:
     y = tf.one_hot(tf.cast(y, tf.int32), num_classes)
     return x, y
 
-  def parser_v2(record):
+  def parser_v2(self,record):
     keys_to_features = {
         "image": tf.io.FixedLenFeature([], tf.string),
         "label": tf.io.FixedLenFeature([], tf.int64),
