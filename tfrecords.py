@@ -84,7 +84,7 @@ class TFRecord:
   #   y = tf.one_hot(tf.cast(y, tf.int32), num_classes)
   #   return x, y
 
-  def parser_v1(proto):
+  def parser_v1(self,proto,num_classes=10):
     # define your tfrecord again. Remember that you saved your image as a string.
     # keys_to_features = {'image_raw': tf.FixedLenFeature([], tf.string),
     #                     "label": tf.FixedLenFeature([], tf.int64)}
