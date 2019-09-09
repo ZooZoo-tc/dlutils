@@ -84,7 +84,7 @@ class TFRecord:
     y = tf.one_hot(tf.cast(y, tf.int32), num_classes)
     return x, y
 
-  def parser_v2(self,record):
+  def parser_v2(self,record,h=32,w=32,c=3,num_classes=10):
     keys_to_features = {
         "image": tf.io.FixedLenFeature([], tf.string),
         "label": tf.io.FixedLenFeature([], tf.int64),
@@ -96,7 +96,7 @@ class TFRecord:
     parsed_image = tf.io.decode_raw(parsed["image"], tf.uint8)
     parsed_image = tf.cast(parsed_image, tf.float32) / 255.0
     # parsed_image =  tf.reshape(parsed_image, [parsed["height"], parsed["width"], parsed["depth"]])    
-    parsed_image =  tf.reshape(parsed_image, [32, 32, 3])
+    parsed_image =  tf.reshape(parsed_image, [h, w, c])
     # parsed_image = tf.image.per_image_standardization(parsed_image) ????? per image standarization -- should we use or not
     
     # label = tf.cast(parsed["label"], tf.int32)
