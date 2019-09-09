@@ -24,7 +24,6 @@ class TFRecord:
   # VERSIONS = Enum('V1', 'V2')
 
   def __init__(self,base_path=base_path,is_mount_required=True,version='V1'):
-    tf.enable_eager_execution()
     self.base_path = base_path
     self.is_mount_required = is_mount_required
     self.datasets = datasets()
@@ -76,8 +75,8 @@ class TFRecord:
 
   def parser_v1(self,record,h=32,w=32,c=3,num_classes=10):
     dtype=tf.float32
-    features = {'image': tf.FixedLenFeature([h * w * c], dtype),
-                 'label': tf.FixedLenFeature([], tf.int64)}
+    features = {'image': tf.io.FixedLenFeature([h * w * c], dtype),
+                 'label': tf.io.FixedLenFeature([], tf.int64)}
     example = tf.io.parse_single_example(record, features=features)
     x, y = example["image"], example['label']
     # x = x / 255.0
