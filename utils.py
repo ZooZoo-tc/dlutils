@@ -2,7 +2,7 @@ import os.path
 from os import path
 from google.colab import drive
 from google.colab import files
-import tf
+import tensorflow as tf
 
 def is_file_exists(file_path):
       return path.exists(file_path)
