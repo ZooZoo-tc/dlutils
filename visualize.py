@@ -1,4 +1,5 @@
 from matplotlib import pyplot as plt
+import numpy as np
 
 def show_image(img, figsize=(2, 2), annotation=None):
     fig, ax = plt.subplots(figsize=figsize)
