@@ -13,6 +13,6 @@ def mkdirs(filepath):
 def mount():
     drive.mount('/content/drive')
 
-def downloadModelPlot(file_name= 'model_plot.png'):
+def downloadModelPlot(model,file_name= 'model_plot.png'):
       tf.keras.utils.plot_model(model, to_file=file_name, show_shapes=True, show_layer_names=True)
       files.download(file_name)
